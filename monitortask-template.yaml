@@ -44,7 +44,7 @@ spec:
     default: "github"
     type: string
   - name: apiurl
-    description: The git api URL for the repository
+    description: The git api URL for the repositorys
     default: ""
     type: string
   - name: insecure-skip-tls-verify
