@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: '2019-09-04T15:37:30Z'
+  name: tekton-operator-lock
+  namespace: tekton-pipelines
+  ownerReferences:
+    - apiVersion: v1
+      kind: Pod
+      name: tekton-operator-586c8b9fd4-d8vjx
+      uid: df5028ee-cf29-11e9-9585-06fdbb47cfe6
+  resourceVersion: '117755'
+  selfLink: /api/v1/namespaces/tekton-pipelines/configmaps/tekton-operator-lock
+  uid: e8214495-cf29-11e9-9585-06fdbb47cfe6
