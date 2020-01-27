@@ -89,14 +89,6 @@ spec:
           value: $(params.dashboardurl)
         - name: secret
           value: $(params.gitsecretname)
-        - name: statusesurl
-          value: $(params.statusesurl)
-        - name: provider
-          value: $(params.provider)
-        - name: apiurl
-          value: $(params.apiurl)
-        - name: insecure-skip-tls-verify
-          value: $(params.insecure-skip-tls-verify)
         resources:
         - name: pull-request
           resourceRef:
