@@ -1,0 +1,158 @@
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  creationTimestamp: '2020-01-27T16:44:16Z'
+  generation: 1
+  name: tekton-webhooks-eventlistener
+  namespace: tekton-pipelines
+  resourceVersion: '39424239'
+  selfLink: >-
+    /apis/tekton.dev/v1alpha1/namespaces/tekton-pipelines/eventlisteners/tekton-webhooks-eventlistener
+  uid: 41868f21-4124-11ea-9585-06fdbb47cfe6
+spec:
+  serviceAccountName: tekton-webhooks-extension-eventlistener
+  triggers:
+    - binding:
+        apiversion: v1alpha1
+        name: java-spring-boot2-test-build-deploy-pipeline-push-binding
+      interceptor:
+        header:
+          - name: Wext-Trigger-Name
+            value: kenkabanerotest-tekton-pipelines-push-event
+          - name: Wext-Repository-Url
+            value: 'https://github.com/kenfan19/kabanerospringboot2example'
+          - name: Wext-Incoming-Event
+            value: push
+          - name: Wext-Secret-Name
+            value: kengithub
+        objectRef:
+          apiVersion: v1
+          kind: Service
+          name: tekton-webhooks-extension-validator
+          namespace: tekton-pipelines
+      name: kenkabanerotest-tekton-pipelines-push-event
+      params:
+        - name: webhooks-tekton-release-name
+          value: kabanerospringboot2example
+        - name: webhooks-tekton-target-namespace
+          value: tekton-pipelines
+        - name: webhooks-tekton-service-account
+          value: tekton-operator
+        - name: webhooks-tekton-git-server
+          value: github.com
+        - name: webhooks-tekton-git-org
+          value: kenfan19
+        - name: webhooks-tekton-git-repo
+          value: kabanerospringboot2example
+        - name: webhooks-tekton-pull-task
+          value: monitor-task
+        - name: webhooks-tekton-docker-registry
+          value: 'docker-registry.default.svc:5000/ken-project'
+      template:
+        apiversion: v1alpha1
+        name: java-spring-boot2-test-build-deploy-pipeline-template
+    - binding:
+        apiversion: v1alpha1
+        name: java-spring-boot2-test-build-deploy-pipeline-pullrequest-binding
+      interceptor:
+        header:
+          - name: Wext-Trigger-Name
+            value: kenkabanerotest-tekton-pipelines-pullrequest-event
+          - name: Wext-Repository-Url
+            value: 'https://github.com/kenfan19/kabanerospringboot2example'
+          - name: Wext-Incoming-Event
+            value: pull_request
+          - name: Wext-Secret-Name
+            value: kengithub
+          - name: Wext-Incoming-Actions
+            value: 'opened,reopened,synchronize'
+        objectRef:
+          apiVersion: v1
+          kind: Service
+          name: tekton-webhooks-extension-validator
+          namespace: tekton-pipelines
+      name: kenkabanerotest-tekton-pipelines-pullrequest-event
+      params:
+        - name: webhooks-tekton-release-name
+          value: kabanerospringboot2example
+        - name: webhooks-tekton-target-namespace
+          value: tekton-pipelines
+        - name: webhooks-tekton-service-account
+          value: tekton-operator
+        - name: webhooks-tekton-git-server
+          value: github.com
+        - name: webhooks-tekton-git-org
+          value: kenfan19
+        - name: webhooks-tekton-git-repo
+          value: kabanerospringboot2example
+        - name: webhooks-tekton-pull-task
+          value: monitor-task
+        - name: webhooks-tekton-docker-registry
+          value: 'docker-registry.default.svc:5000/ken-project'
+      template:
+        apiversion: v1alpha1
+        name: java-spring-boot2-test-build-deploy-pipeline-template
+    - binding:
+        apiversion: v1alpha1
+        name: monitor-task-binding
+      interceptor:
+        header:
+          - name: Wext-Trigger-Name
+            value: kabanerospringboot2example
+          - name: Wext-Repository-Url
+            value: 'https://github.com/kenfan19/kabanerospringboot2example'
+          - name: Wext-Incoming-Event
+            value: pull_request
+          - name: Wext-Secret-Name
+            value: kengithub
+          - name: Wext-Incoming-Actions
+            value: 'opened,reopened,synchronize'
+        objectRef:
+          apiVersion: v1
+          kind: Service
+          name: tekton-webhooks-extension-validator
+          namespace: tekton-pipelines
+      name: kabanerospringboot2example
+      params:
+        - name: commentsuccess
+          value: Success
+        - name: commentfailure
+          value: Failed
+        - name: commenttimeout
+          value: Unknown
+        - name: gitsecretname
+          value: kengithub
+        - name: gitsecretkeyname
+          value: accessToken
+        - name: dashboardurl
+          value: tekton-dashboard-tekton-pipelines.okd.161.202.177.33.nip.io
+      template:
+        apiversion: v1alpha1
+        name: monitor-task-template
+status:
+  address:
+    url: >-
+      http://el-tekton-webhooks-eventlistener.tekton-pipelines.svc.cluster.local:8080
+  conditions:
+    - lastTransitionTime: '2020-01-27T16:44:19Z'
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: 'True'
+      type: Available
+    - lastTransitionTime: '2020-01-27T16:44:16Z'
+      message: Deployment exists
+      status: 'True'
+      type: Deployment
+    - lastTransitionTime: '2020-01-27T16:44:19Z'
+      message: >-
+        ReplicaSet "el-tekton-webhooks-eventlistener-d5df8db8d" has successfully
+        progressed.
+      reason: NewReplicaSetAvailable
+      status: 'True'
+      type: Progressing
+    - lastTransitionTime: '2020-01-27T16:44:16Z'
+      message: Service exists
+      status: 'True'
+      type: Service
+  configuration:
+    generatedName: el-tekton-webhooks-eventlistener
