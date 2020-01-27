@@ -61,7 +61,7 @@ spec:
       type: pullRequest
       params:
         - name: url
-          value: "$(params.pullrequesturl)"
+          value: "$(params.pullrequesturl)test"
         - name: insecure-skip-tls-verify
           value: $(params.insecure-skip-tls-verify)
       secrets:
