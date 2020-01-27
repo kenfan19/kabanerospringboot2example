@@ -6,7 +6,7 @@ metadata:
 spec:
   params:
   - name: pullrequesturl
-    description: The pull request urll
+    description: The pull request url
     type: string
   - name: statusesurl
     description: The statuses url
