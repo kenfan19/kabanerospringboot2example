@@ -55,7 +55,7 @@ spec:
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineResource
     metadata:
-      name: pull-request
+      name: pull-request-$(uid)
       namespace: tekton-pipelines
     spec:
       type: pullRequest
