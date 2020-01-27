@@ -40,7 +40,7 @@ spec:
     default: "http://localhost:9097/"
     type: string
   - name: provider
-    description: The git provider, "github" or "gitlabs"
+    description: The git provider, "github" or "gitlab"
     default: "github"
     type: string
   - name: apiurl
