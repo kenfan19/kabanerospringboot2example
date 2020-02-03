@@ -36,7 +36,7 @@ spec:
     default: "Missing"
     type: string
   - name: dashboardurl
-    description: The URL to the pipelineruns page of the dashboard
+    description: The URL to the pipelineruns page of the dashboardd
     default: "http://localhost:9097/"
     type: string
   - name: provider
